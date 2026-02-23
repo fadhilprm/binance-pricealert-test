@@ -14,6 +14,7 @@ public class Alert {
     private String condition; // >, <, =
     private boolean isTriggered;
     private LocalDateTime createdAt;
+    private LocalDateTime triggeredAt;
 
     // Getters and Setters
     public String getId() {
@@ -62,5 +63,13 @@ public class Alert {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getTriggeredAt() {
+        return triggeredAt;
+    }
+
+    public void setTriggeredAt(LocalDateTime triggeredAt) {
+        this.triggeredAt = triggeredAt;
     }
 }

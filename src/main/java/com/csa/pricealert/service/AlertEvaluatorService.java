@@ -81,6 +81,7 @@ public class AlertEvaluatorService {
             statement.addListener((newData, oldData, stmt, runtime) -> {
                 if (!alert.isTriggered()) {
                     alert.setTriggered(true);
+                    alert.setTriggeredAt(LocalDateTime.now());
                     alertRepository.save(alert); // Persist triggered state
                     logger.info("CEP ALERT TRIGGERED! {} crossed {}", alert.getSymbol(), alert.getTargetPrice());
                     messagingTemplate.convertAndSend("/topic/alerts", alert);

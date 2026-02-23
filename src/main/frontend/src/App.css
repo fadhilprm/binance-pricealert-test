@@ -60,16 +60,40 @@ button:hover {
     background: #0369a1;
 }
 
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .alert-popup {
     background: #ef4444;
     color: white;
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     border-radius: 8px;
-    margin-bottom: 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1.5rem;
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+    animation: slideIn 0.3s ease-out;
+    min-width: 300px;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .alert-popup p {
@@ -91,49 +115,66 @@ li {
     border-bottom: 1px solid #334155;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 li.triggered {
     color: #94a3b8;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+li.triggered strong {
     text-decoration: line-through;
 }
 
 li.triggered span {
     color: #ef4444;
     font-weight: bold;
-    text-decoration: none;
 }
+
+.alert-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.alert-date {
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
 .grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
 }
 
 @media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
+    .grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .price-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
 }
 
-.price-table th, .price-table td {
-  padding: 0.75rem;
-  text-align: left;
-  border-bottom: 1px solid #334155;
+.price-table th,
+.price-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #334155;
 }
 
 .price-table th {
-  color: #94a3b8;
-  font-weight: 600;
+    color: #94a3b8;
+    font-weight: 600;
 }
 
 .live-price {
-  font-family: monospace;
-  font-size: 1.1rem;
-  color: #10b981;
+    font-family: monospace;
+    font-size: 1.1rem;
+    color: #10b981;
 }

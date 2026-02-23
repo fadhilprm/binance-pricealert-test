@@ -88,15 +88,17 @@ function App() {
 
     return (
         <div className="container">
-            <h1>Binance Price Alert</h1>
+            <div className="toast-container">
+                {notifications.map(note => (
+                    <div key={`notif-${note.id}`} className="alert-popup">
+                        <strong>🔔 ALERT TRIGGERED!</strong>
+                        <p>{note.symbol} reached {note.condition} {note.targetPrice}</p>
+                        <button onClick={() => removeNotification(note.id)}>Dismiss</button>
+                    </div>
+                ))}
+            </div>
 
-            {notifications.map(note => (
-                <div key={`notif-${note.id}`} className="alert-popup">
-                    <strong>🔔 ALERT TRIGGERED!</strong>
-                    <p>{note.symbol} reached {note.condition} {note.targetPrice}</p>
-                    <button onClick={() => removeNotification(note.id)}>Dismiss</button>
-                </div>
-            ))}
+            <h1>Binance Price Alert</h1>
 
             <div className="grid">
                 <div className="card">
@@ -163,8 +165,20 @@ function App() {
                 <ul>
                     {alerts.map(a => (
                         <li key={a.id} className={a.triggered ? 'triggered' : ''}>
-                            {a.symbol} {a.condition} {a.targetPrice}
-                            {a.triggered && <span> (Triggered)</span>}
+                            <div className="alert-info">
+                                <strong>{a.symbol} {a.condition} {a.targetPrice}</strong>
+                                {a.createdAt && (
+                                    <small className="alert-date">
+                                        Created on: {new Date(a.createdAt).toLocaleString()}
+                                    </small>
+                                )}
+                                {a.triggered && a.triggeredAt && (
+                                    <small className="alert-date" style={{ color: '#ef4444' }}>
+                                        Triggered on: {new Date(a.triggeredAt).toLocaleString()}
+                                    </small>
+                                )}
+                            </div>
+                            {a.triggered && <span>(Triggered)</span>}
                         </li>
                     ))}
                 </ul>
